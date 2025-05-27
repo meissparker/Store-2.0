@@ -6,7 +6,7 @@ const NavBar: React.FC = () => {
     <Navbar bg="light" expand="lg" variant="light" className="shadow-sm mb-3">
       <Container>
         <Navbar.Brand as={NavLink} to="/" className="fw-bold">
-          Task Manager
+          The Clothing Outlet
         </Navbar.Brand>
 
         <Navbar.Toggle aria-controls="navbar-nav" />

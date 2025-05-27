@@ -8,15 +8,15 @@ type PageLayoutProps = {
 const PageLayout: React.FC<PageLayoutProps> = ({children}) => {
     return (
         <>
-        
-        <Container>
-            <Row>
-                <Col>      
-                    <NavBar/>
-                    {children}
-                </Col>
-            </Row>
-        </Container>
+            <NavBar/>
+            <Container>
+                <Row>
+                    <Col>      
+                        
+                        {children}
+                    </Col>
+                </Row>
+            </Container>
         </>
     );
 };
