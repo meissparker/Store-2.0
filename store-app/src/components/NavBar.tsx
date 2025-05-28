@@ -12,7 +12,7 @@ const NavBar: React.FC = () => {
         <Navbar.Toggle aria-controls="navbar-nav" />
         <Navbar.Collapse id="navbar-nav">
           <Nav className="me-auto">
-            <Nav.Link as={NavLink} to="/">Home</Nav.Link>
+            <Nav.Link as={NavLink} to="/">Products</Nav.Link>
             <Nav.Link as={NavLink} to="/cart">Shopping Cart</Nav.Link>
           </Nav>
         </Navbar.Collapse>
