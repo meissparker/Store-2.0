@@ -1,7 +1,7 @@
 import React from "react";
 import "./App.css";
 import { Route, Routes } from "react-router-dom";
-import HomePage from './components/Products.tsx'
+import Products from './components/Products.tsx'
 import ShoppingCart from "./components/ShoppingCart.tsx";
 import ProductDetails from './components/ProductDetails'
 
@@ -10,7 +10,7 @@ const App: React.FC = () => {
     <Routes>
       <Route
         path="/"
-        element={<HomePage />}
+        element={<Products />}
       />
       <Route
         path="/cart"
