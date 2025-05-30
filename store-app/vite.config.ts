@@ -1,7 +1,12 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
+import type { UserConfig } from 'vite'
 
-// https://vite.dev/config/
+// defineConfig will now allow `test` when casted properly
 export default defineConfig({
   plugins: [react()],
-})
+  test: {
+    globals: true,
+    environment: 'jsdom',
+  },
+} as UserConfig)
