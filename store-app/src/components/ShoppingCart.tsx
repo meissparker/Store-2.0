@@ -10,6 +10,8 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import { useState } from 'react'
 import Alert from 'react-bootstrap/Alert'
+import { getAuth } from 'firebase/auth';
+import { placeOrder } from '../services/OrderService'
 
 
 const ShoppingCart: React.FC = () => {
@@ -63,11 +65,25 @@ const ShoppingCart: React.FC = () => {
                         <h4>Total: ${total.toFixed(2)}</h4>
                         <Button 
                         variant ="success" 
-                        onClick={() => {
-                            dispatch(clearCart());
-                            sessionStorage.removeItem('cart');
-                            setOrderSuccess(true);
-                            setTimeout(() => setOrderSuccess(false), 3000);
+                        onClick={async () => {
+                            const auth = getAuth();
+                            const user = auth.currentUser;
+
+                            if (!user) {
+                                alert('You must be logged in to place an order.')
+                                return;
+                            }
+
+                            try {
+                                await placeOrder(user.uid, cartItems);
+                                dispatch(clearCart());
+                                sessionStorage.removeItem('cart');
+                                setOrderSuccess(true);
+                                setTimeout(() => setOrderSuccess(false), 3000);
+                            } catch (error) {
+                                console.error('Failed to place order:', error);
+                                alert('Failed to place order.')
+                            }
                         }}
                         >
                             Checkout

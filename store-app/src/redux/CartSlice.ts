@@ -2,7 +2,7 @@ import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
 import { fetchCounter } from './asyncActions'; // Import the async thunk
 
 interface CartItem {
-    id: number;
+    id: string;
     title: string;
     image: string;
     quantity: number;
@@ -44,7 +44,7 @@ const cartSlice = createSlice({
             }
          },
 
-         decrementFromCart: (state, action: PayloadAction<number>) => {
+         decrementFromCart: (state, action: PayloadAction<string>) => {
             const item = state.items.find(i => i.id === action.payload);
             if (item && item.quantity > 1) {
                 item.quantity -= 1;

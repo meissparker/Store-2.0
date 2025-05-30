@@ -8,14 +8,16 @@ import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
 import Alert from 'react-bootstrap/Alert';
 import Form from 'react-bootstrap/Form';
-import { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { addToCart } from '../redux/CartSlice';
 import { type AppDispatch } from '../redux/store';
+import { fetchProducts } from '../services/ProductService'
+import { fetchCategories } from "../services/ProductService";
 
 type Product = {
-    id: number;
+    id: string;
     title: string;
     price: number;
     description: string;
@@ -23,23 +25,11 @@ type Product = {
     image: string;
 };
 
-const fetchCategories = async (): Promise<string[]> => {
-    const response = await axios.get('https://fakestoreapi.com/products/categories');
-    return response.data;
-};
-
-const fetchProducts = async (category: string): Promise<Product[]> => {
-    const url = category && category !== 'all'
-        ? `https://fakestoreapi.com/products/category/${category}`
-        : `https://fakestoreapi.com/products`;
-    const response = await axios.get(url);
-    return response.data;
-};
 
 const Products: React.FC = () => {
-    const [category, setCategory] = useState<string>('all');
-    const [successProductId, setSuccessProductId] = useState<number | null>(null);
     const dispatch = useDispatch<AppDispatch>();
+    const [successProductId, setSuccessProductId] = useState<string | null>(null)
+    const [category, setCategory] = useState<string>('all');
 
     const { data: categories } = useQuery({
         queryKey: ['categories'],
@@ -72,7 +62,7 @@ const Products: React.FC = () => {
                 {isLoading && <p>Loading products...</p>}
                 {error && <p>Error loading products</p>}
                 <Row>
-                    {products?.map((product) => (
+                    {products?.map((product: Product & {id: string}) => (
                         <Col key={product.id} md={4} className="mb-3">
                             <Card>
                                 <Card.Img variant="top" src={product.image} alt={product.title} />

@@ -82,7 +82,7 @@ const ProductDetails: React.FC = () => {
                                     className="mt-2"
                                     onClick={() => {
                                         dispatch(addToCart({
-                                        id: data.id,
+                                        id: data.id.toString(),
                                         title: data.title,
                                         image: data.image,
                                         price: data.price,
