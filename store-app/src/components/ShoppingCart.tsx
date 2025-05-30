@@ -1,7 +1,7 @@
 import { useSelector, useDispatch } from 'react-redux';
 import { selectCartItems } from '../redux/cartSelectors';
-import { type RootState, type AppDispatch } from '../redux/store';
-import { decrementFromCart, clearCart, addToCart } from '../redux/CartSlice';
+import { type AppDispatch } from '../redux/store';
+import { decrementFromCart, clearCart} from '../redux/CartSlice';
 import PageLayout from "./PageLayout";
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';

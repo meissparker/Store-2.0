@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { fetchOrderById } from '../services/OrderService';
-import { Container, Card, ListGroup, Spinner } from 'react-bootstrap';
+import { Container, ListGroup, Spinner } from 'react-bootstrap';
 import { Timestamp } from 'firebase/firestore';
 import PageLayout from './PageLayout';
 

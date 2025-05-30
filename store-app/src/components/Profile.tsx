@@ -26,6 +26,8 @@ const Profile: React.FC = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('')
     const [currentPassword, setCurrentPassword] = useState('');
+    const [userData, setUserData] = useState<any>(null); 
+    const [loading, setLoading] = useState(false);
 
 
     useEffect(() => {
@@ -41,6 +43,7 @@ const Profile: React.FC = () => {
                     const doc = querySnapshot.docs[0];
                     const data = doc.data();
                     setUserData(data);
+                    console.log(userData)
                     setEmail(user.email || '')
                     setDocId(doc.id);
                     setName(data.name || '');
@@ -191,7 +194,7 @@ const Profile: React.FC = () => {
                     />
                 </Form.Group>
 
-                <Button onClick={handleUpdate} variant="primary" className="me-2">
+                <Button onClick={handleUpdate} variant="primary" className="me-2" disabled={loading}>
                     Update Profile
                 </Button>
 
