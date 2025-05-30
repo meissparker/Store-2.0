@@ -18,7 +18,6 @@ import { reauthenticateWithCredential, EmailAuthProvider } from 'firebase/auth';
 
 const Profile: React.FC = () => {
     const navigate = useNavigate();
-    const [userData, setUserData] = useState<any>(null);
     const [docId, setDocId] = useState<string>('');
     const [name, setName] = useState('');
     const [address, setAddress] = useState('');
@@ -26,7 +25,6 @@ const Profile: React.FC = () => {
     const [error, setError] = useState<string | null>(null);
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('')
-    const [loading, setLoading] = useState(false)
     const [currentPassword, setCurrentPassword] = useState('');
 
 

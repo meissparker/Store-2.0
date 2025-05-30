@@ -1,6 +1,5 @@
 import PageLayout from "./PageLayout";
 import { useQuery } from '@tanstack/react-query';
-import axios from 'axios';
 import Card from "react-bootstrap/Card";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
@@ -8,7 +7,7 @@ import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
 import Alert from 'react-bootstrap/Alert';
 import Form from 'react-bootstrap/Form';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { addToCart } from '../redux/CartSlice';
