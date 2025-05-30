@@ -20,9 +20,11 @@ jobs:
 
       - name: Install dependencies
         run: npm install
+        working-directory: ./store-app
 
       - name: Run tests
-        run: npm test -- --watchAll=false
+        run: npm run test
+        working-directory: ./store-app
 
   deploy:
     needs: build-and-test
