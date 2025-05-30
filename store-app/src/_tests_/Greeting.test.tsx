@@ -1,5 +1,5 @@
 import { render, fireEvent, screen } from '@testing-library/react';
-import Greeting from '../Greeting';
+import Greeting from '../components/Greeting';
 import { describe, it, expect } from 'vitest';
 
 describe('Greeting component', () => {
