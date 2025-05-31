@@ -44,25 +44,31 @@ const ManageProducts: React.FC = () => {
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         try {
+            const parsedPrice = parseFloat(formData.price);
+            if (isNaN(parsedPrice)) throw new Error('Invalid price');
+
+            const productPayload = {
+                title: formData.title,
+                price: parsedPrice,
+                description: formData.description,
+                category: formData.category,
+                image: formData.image,
+            };
+
             if (editingId) {
-                await updateProduct(editingId, {
-                    ...formData,
-                    price: parseFloat(formData.price as unknown as string)
-                });
-                setMessage('Product updated!')
+                await updateProduct(editingId, productPayload);
+                setMessage('Product updated!');
             } else {
-                await createProduct({
-                    ...formData,
-                    price: parseFloat(formData.price as unknown as string)
-                });
-                setMessage('Product created!')
+                await createProduct(productPayload);
+                setMessage('Product created!');
             }
+
             setFormData(initialFormState);
             setEditingId(null);
             loadProducts();
         } catch (err) {
             setMessage('Failed to save product');
-            console.error(err);
+            console.error('Update failed:', err);
         }
     };
 
@@ -73,8 +79,8 @@ const ManageProducts: React.FC = () => {
             description: product.description,
             category: product.category,
             image: product.image
-            });
-        setEditingId(product.id);
+        });
+        setEditingId(String(product.id));
     };
 
     const handleDelete = async (id: string) => {
@@ -94,13 +100,19 @@ const ManageProducts: React.FC = () => {
 
                 <Row className="justify-content-center">
                     <Col md={6} lg={5}>
+                        {editingId && (
+                            <Alert variant="warning">
+                                Editing product – make changes below and click <strong>Update Product</strong>
+                            </Alert>
+                        )}
                         <Form onSubmit={handleSubmit}>
 
 
 
                             <Form.Group className="mb-2">
-                                <Form.Label>Title</Form.Label>
+                                <Form.Label htmlFor="title">Title</Form.Label>
                                 <Form.Control
+                                    id="title"
                                     value={formData.title}
                                     onChange={(e) => setFormData({ ...formData, title: e.target.value })}
                                     required
@@ -108,8 +120,9 @@ const ManageProducts: React.FC = () => {
                             </Form.Group>
 
                             <Form.Group className="mb-2">
-                                <Form.Label>Price</Form.Label>
+                                <Form.Label htmlFor="price">Price</Form.Label>
                                 <Form.Control
+                                    id="price"
                                     type="number"
                                     value={formData.price}
                                     onChange={(e) => setFormData({ ...formData, price: e.target.value })}
@@ -118,8 +131,9 @@ const ManageProducts: React.FC = () => {
                             </Form.Group>
 
                             <Form.Group className="mb-2">
-                                <Form.Label>Description</Form.Label>
+                                <Form.Label htmlFor="description">Description</Form.Label>
                                 <Form.Control
+                                    id="description"
                                     value={formData.description}
                                     onChange={(e) => setFormData({ ...formData, description: e.target.value })}
                                     required
@@ -127,24 +141,26 @@ const ManageProducts: React.FC = () => {
                             </Form.Group>
 
                             <Form.Group className="mb-2">
-                                <Form.Label>Category</Form.Label>
+                                <Form.Label htmlFor="category">Category</Form.Label>
                                 <Form.Select
+                                    id="category"
                                     value={formData.category}
                                     onChange={(e) => setFormData({ ...formData, category: e.target.value })}
                                     required
                                 >
-                                <option value="">Select a category</option>
-                                <option value="men's clothing">Men's Clothing</option>
-                                <option value="women's clothing">Women's Clothing</option>
-                                <option value="jewelry">Jewelry</option>
-                                <option value="electronics">Electronics</option>
+                                    <option value="">Select a category</option>
+                                    <option value="men's clothing">Men's Clothing</option>
+                                    <option value="women's clothing">Women's Clothing</option>
+                                    <option value="jewelry">Jewelry</option>
+                                    <option value="electronics">Electronics</option>
                                 </Form.Select>
                             </Form.Group>
 
 
                             <Form.Group className="mb-2">
-                                <Form.Label>Image URL</Form.Label>
+                                <Form.Label htmlFor="image">Image URL</Form.Label>
                                 <Form.Control
+                                    id="image"
                                     value={formData.image}
                                     onChange={(e) => setFormData({ ...formData, image: e.target.value })}
                                 />
@@ -153,6 +169,19 @@ const ManageProducts: React.FC = () => {
                             <Button type="submit" className="mt-2">
                                 {editingId ? 'Update Product' : 'Add Product'}
                             </Button>
+
+                            {editingId && (
+                                <Button
+                                    variant="secondary"
+                                    className="ms-2"
+                                    onClick={() => {
+                                        setEditingId(null);
+                                        setFormData(initialFormState);
+                                    }}
+                                >
+                                    Cancel Edit
+                                </Button>
+                            )}
 
 
                         </Form>

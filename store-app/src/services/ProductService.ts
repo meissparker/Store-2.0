@@ -51,7 +51,8 @@ export const createProduct = async (product: Product) => {
 };
 
 export const updateProduct = async (id: string, updatedProduct: Partial<Product>) => {
-    const productDoc = doc(db, 'products', id);
+    console.log('updateProduct called with id:', id, 'type:', typeof id);
+    const productDoc = doc(db, 'products', id); // 💥 Error happens here if id isn't a string
     return await updateDoc(productDoc, updatedProduct);
 };
 

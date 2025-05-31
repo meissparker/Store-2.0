@@ -1,17 +1,17 @@
 import React from "react";
 import "./App.css";
 import { Route, Routes } from "react-router-dom";
-import Products from './components/Products.tsx'
-import ShoppingCart from "./components/ShoppingCart.tsx";
+import Products from './components/Products'
+import ShoppingCart from "./components/ShoppingCart";
 import ProductDetails from './components/ProductDetails'
 import Login from './components/Login';
 import Register from './components/Register'; 
 import PrivateRoute from './components/PrivateRoute';
-import Profile from "./components/Profile.tsx";
-import ManageProducts from "./components/ManageProducts.tsx";
-import UploadProductsPage from "./UploadProductsPage.tsx";
-import OrderDetails from "./components/OrderDetails.tsx";
-import Orders from "./components/Orders.tsx";
+import Profile from "./components/Profile";
+import ManageProducts from "./components/ManageProducts";
+import UploadProductsPage from "./UploadProductsPage";
+import OrderDetails from "./components/OrderDetails";
+import Orders from "./components/Orders";
 
 
 const App: React.FC = () => {

@@ -66,7 +66,7 @@ const Products: React.FC = () => {
                             <Card>
                                 <Card.Img variant="top" src={product.image} alt={product.title} />
                                 <Card.Body>
-                                    <Card.Title>{product.title}</Card.Title>
+                                    <Card.Title data-testid="product-title">{product.title}</Card.Title>
                                     <Card.Subtitle>{product.category}</Card.Subtitle>
                                     <Card.Text>${product.price.toFixed(2)}</Card.Text>
 
