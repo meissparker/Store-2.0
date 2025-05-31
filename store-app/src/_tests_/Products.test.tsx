@@ -5,7 +5,8 @@ import { Provider } from 'react-redux';
 import { store } from '../redux/store';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { MemoryRouter } from 'react-router-dom';
-import * as ProductService from '../services/ProductService'; // <-- to mock
+import * as ProductService from '../services/ProductService'; 
+import '@testing-library/jest-dom';
 
 const queryClient = new QueryClient();
 

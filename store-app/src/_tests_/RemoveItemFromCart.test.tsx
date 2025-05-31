@@ -1,4 +1,4 @@
-
+import '@testing-library/jest-dom'; 
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { Provider } from 'react-redux';
@@ -8,13 +8,20 @@ import { MemoryRouter } from 'react-router-dom';
 import ShoppingCart from '../components/ShoppingCart';
 import { addToCart } from '../redux/CartSlice';
 
-jest.mock('firebase/auth', () => ({
-  getAuth: () => ({}),
-  onAuthStateChanged: jest.fn((auth, callback) => {
-    callback({ uid: 'test-user-id' });
-    return () => {};
-  }),
-}));
+
+jest.mock('firebase/auth', () => {
+  return {
+    __esModule: true,
+    getAuth: () => ({
+      currentUser: { uid: 'test-user-id' },
+    }),
+    onAuthStateChanged: jest.fn((_, callback) => {
+      callback({ uid: 'test-user-id' });
+      return () => {};
+    }),
+  };
+});
+
 
 jest.mock('@auth0/auth0-react', () => ({
   useAuth0: () => ({
