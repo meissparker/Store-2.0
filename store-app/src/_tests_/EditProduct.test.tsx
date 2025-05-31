@@ -7,7 +7,7 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { MemoryRouter } from 'react-router-dom';
 import * as ProductService from '../services/ProductService';
 
-// Mock Firestore product service
+
 jest.mock('../services/ProductService');
 
 const mockProduct = {
